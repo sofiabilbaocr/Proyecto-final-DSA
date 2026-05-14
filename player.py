@@ -48,4 +48,10 @@ class MusicPlayer:
         self.current_song = self.stack.pop_prev()
         return self.current_song
  
-    
+    def peek_next(self) -> str:
+        #muestra la siguiente canción por sonar sin ponerla ni nada
+        return self.stack.peek_next()
+ 
+    def peek_prev(self) -> str:
+        #muestra la canción anterior sin regresar ni nada
+        return self.stack.peek_prev()
