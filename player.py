@@ -17,5 +17,6 @@ class MusicPlayer:
             f'{self.stack}'
         )
     
-
-    
+    def add_song(self, song: str) -> None:
+        #arega una canción al stack de siguientes
+        self.stack.push_next(song)
