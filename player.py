@@ -30,3 +30,22 @@ class MusicPlayer:
     #l canción actual pasa al stack de anteriores
         if self.current_song is not None:
             self.stack.push_prev(self.current_song)
+
+    #la siguiente canción se convierte en la actual
+        self.current_song = self.stack.pop_next()
+        return self.current_song
+ 
+    def play_prev(self) -> str:
+        #verifica que haya una canción antes
+        if self.stack.top_prev == -1:
+            return 'No hay canciones anteriores.'
+ 
+        #la canción actual regresa al stack de siguientes
+        if self.current_song is not None:
+            self.stack.push_next(self.current_song)
+ 
+        #la canción anterior se convierte en la actual
+        self.current_song = self.stack.pop_prev()
+        return self.current_song
+ 
+    
