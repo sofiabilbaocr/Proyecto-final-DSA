@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Double Music Stack</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
         <header>
@@ -12,7 +12,7 @@
         <main>
 
             <section class="stack-section">
-                <div class="stack header">
+                <div class="stack-header">
                     <div>
                         <h3>Array Vizualizer</h3>
                         <p id="stack-now-playing" class="now-playing">Selecciona una canción🎵​</p> 
@@ -25,7 +25,7 @@
                 <div id="stack-viz" class="stack-bar"></div>
                 <div class="stack-labels">
                     <span>Pila Anterior (Top: <span id="idx-prev">-1</span>)</span>
-                    <span>Pila Siguiente (Top: <span id="idx-prev">20</span>)</span>
+                    <span>Pila Siguiente (Top: <span id="idx-next">20</span>)</span>
                 </div>
             </section>
 
@@ -43,10 +43,9 @@
             <div class="player-controls">
                 <button onclick="">⬅ Anterior</button>
                 <button onclick="">Siguiente ⮕</button>
-                <!-- Agregar función luego -->
             </div>
         </footer>
         
-        <script src="{{url_for('static', filename = 'logic.js')}}"></script>
+        <script src="{{ url_for('static', filename='logic.js') }}"></script>
     </body>
 </html>
