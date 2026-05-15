@@ -1,0 +1,50 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Double Music Stack</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>Double Music Stack - Frontend</h1> 
+        </header>
+
+        <main>
+
+            <section class="stack-section">
+                <div class="stack-header">
+                    <div>
+                        <h3>Array Vizualizer</h3>
+                        <p id="stack-now-playing" class="now-playing">Selecciona una canción🎵​</p> 
+                    </div>
+                    <button class="danger-btn" onclick="clearStack()"> 
+                         Vaciar stack 🗑️​
+                    </button>
+                </div>
+                <div id="stack-viz" class="stack-bar"></div>
+                <div class="stack-labels">
+                    <span>Pila Anterior (Top: <span id="idx-prev">-1</span>)</span>
+                    <span>Pila Siguiente (Top: <span id="idx-next">20</span>)</span>
+                </div>
+            </section>
+
+            <section class="library-section">
+                <h3>Biblioteca de Canciones</h3>
+                <div id="library-container" class="grid-library"></div>
+            </section>
+
+        </main>
+
+        <footer class="player-bar">
+            <div id="player-display">
+                <h2 id="current-song-title">Cargando el sistema...</h2>
+            </div>
+            <div class="player-controls">
+                <button onclick="prevSong()">⬅ Anterior</button>
+                <button onclick="nextSong()">Siguiente ⮕</button>
+            </div>
+        </footer>
+
+        <script src="{{ url_for('static', filename='logic.js') }}"></script>
+    </body>
+</html>
