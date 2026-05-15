@@ -17,8 +17,7 @@
                         <h3>Array Vizualizer</h3>
                         <p id="stack-now-playing" class="now-playing">Selecciona una canción🎵​</p> 
                     </div>
-                    <button class="danger-btn" onclick=""> 
-                        <!-- Agregar función luego -->
+                    <button class="danger-btn" onclick="clearStack()"> 
                          Vaciar stack 🗑️​
                     </button>
                 </div>
@@ -41,11 +40,11 @@
                 <h2 id="current-song-title">Cargando el sistema...</h2>
             </div>
             <div class="player-controls">
-                <button onclick="">⬅ Anterior</button>
-                <button onclick="">Siguiente ⮕</button>
+                <button onclick="prevSong()">⬅ Anterior</button>
+                <button onclick="nextSong()">Siguiente ⮕</button>
             </div>
         </footer>
-        
+
         <script src="{{ url_for('static', filename='logic.js') }}"></script>
     </body>
 </html>

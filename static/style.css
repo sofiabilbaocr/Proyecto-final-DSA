@@ -212,3 +212,18 @@ main {
     transform: scale(1.1);
     z-index: 5;
 }
+
+.prev-zone {
+    background-color: #1DB954;
+    color: white;
+}
+
+.next-zone {
+    background-color: #3d5afe;
+    color: white;
+}
+
+.empty-zone {
+    background-color: #282828;
+    color: #777;
+}
