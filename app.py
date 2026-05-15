@@ -6,7 +6,7 @@ Aquí Irán todos los endpoints de la aplicación para conectarlo con el fronten
 from flask import Flask, jsonify, request, render_template
 from player import MusicPlayer
 
-music = [
+music = [ #Diccionario hardcodeado con las canciones
     {"id": 1, "nombre": "Beauty And A Beat", "artista": "Justin Bieber ft. Nicki Minaj", "duracion": "3:48"},
     {"id": 2, "nombre": "Swim", "artista": "BTS", "duracion": "2:39"},
     {"id": 3, "nombre": "Drop Dead", "artista": "Olivia Rodrigo", "duracion": "3:44"},
@@ -28,3 +28,60 @@ music = [
     {"id": 19, "nombre": "Aperture", "artista": "Harry Styles", "duracion": "3:15"},
     {"id": 20, "nombre": "Billie Jean", "artista": "Michael Jackson", "duracion": "4:54"}
 ]
+app = Flask(__name__)
+
+# Instancia global del reproductor
+player = MusicPlayer()
+
+
+@app.route('/')
+def index():
+    return render_template('index.html') #Esto hace que cuando se corra busque en una carpeta templates (Tiene que ser así por defecto) y adentro de ella corra el index.html
+
+@app.route('/status', methods=['GET'])
+def get_status():
+    # Se agreaga top_prev y top_next para que el JS sepa qué pintar
+    return jsonify({
+        "current_song": player.current_song,
+        "prev_stack": [s for s in player.stack.elements[:player.stack.top_prev + 1] if s is not None],
+        "next_stack": [s for s in player.stack.elements[player.stack.top_next:] if s is not None][::-1],
+        "raw_array": player.stack.elements,
+        "top1_index": player.stack.top_prev,  
+        "top2_index": player.stack.top_next  
+    })
+
+@app.route('/add', methods=['POST']) #Recibe la petición de añadir una canción al array y lo hace o no
+def add_song():
+    data = request.json
+    song_name = data.get('song')
+    if song_name:
+        player.add_song(song_name)
+        return jsonify({"message": "Canción añadida", "status": "success"})
+    return jsonify({"message": "Error", "status": "fail"}), 400
+
+@app.route('/next', methods=['POST']) #Pasa una canción de un lado del array al otro lado
+def next_song():
+    res = player.play_next()
+    return jsonify({"result": res})
+
+@app.route('/prev', methods=['POST']) #Pasa una canción reproducida a reproducirse. botón de canción anterior
+def prev_song():
+    res = player.play_prev()
+    return jsonify({"result": res})
+
+@app.route('/api/library', methods=['GET']) #Para leer las canciones que tenemos (Por si se necesita)
+def get_library():
+    return jsonify(music)
+
+@app.route('/clear', methods=['POST']) #Para Vaciar el array
+def clear_stack():
+    player.stack.__init__(20) 
+    player.current_song = None
+    
+    return jsonify({
+        "ok": True,
+        "message": "Stack vaciado correctamente"
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
